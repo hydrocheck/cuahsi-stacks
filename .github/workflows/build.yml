@@ -1,0 +1,159 @@
+name: build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: code checkout
+      uses: actions/checkout@v2
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+
+    - name: setup up qemu
+      uses: docker/setup-qemu-action@v1
+
+    - name: setup docker buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: dakota-6.7
+      uses: docker/build-push-action@v2
+      with:
+        context: ./dakota-6.7
+        file: ./dakota-6.7/Dockerfile
+        push: false
+        tags: hydrocheck/dakota-6.7:latest
+
+    - name: dhsvm
+      uses: docker/build-push-action@v2
+      with:
+        context: ./dhsvm
+        file: ./dhsvm/Dockerfile
+        push: false
+        tags: hydrocheck/dhsvm:latest
+
+    - name: hspf
+      uses: docker/build-push-action@v2
+      with:
+        context: ./hspf
+        file: ./hspf/Dockerfile
+        push: false
+        tags: hydrocheck/hspf:latest
+
+    - name: jupyterhub
+      uses: docker/build-push-action@v2
+      with:
+        context: ./jupyterhub
+        file: ./jupyterhub/Dockerfile
+        push: false
+        tags: hydrocheck/jupyterhub:latest
+
+    - name: jupyterhub
+      uses: docker/build-push-action@v2
+      with:
+        context: ./jupyterhub
+        file: ./jupyterhub/Dockerfile
+        push: false
+        tags: hydrocheck/jupyterhub:latest
+
+    - name: jupyterhub-rest
+      uses: docker/build-push-action@v2
+      with:
+        context: ./jupyterhub-rest
+        file: ./jupyterhub-rest/Dockerfile
+        push: false
+        tags: hydrocheck/jupyterhub-rest:latest
+
+    - name: modflow-6.0.2
+      uses: docker/build-push-action@v2
+      with:
+        context: ./modflow-6.0.2
+        file: ./modflow-6.0.2/Dockerfile
+        push: false
+        tags: hydrocheck/modflow-6.0.2:latest
+
+    - name: pyhspf
+      uses: docker/build-push-action@v2
+      with:
+        context: ./pyhspf
+        file: ./pyhspf/Dockerfile
+        push: false
+        tags: hydrocheck/pyhspf:latest
+
+    - name: python2
+      uses: docker/build-push-action@v2
+      with:
+        context: ./python2
+        file: ./python2/Dockerfile
+        push: false
+        tags: hydrocheck/python2:latest
+
+    - name: python3
+      uses: docker/build-push-action@v2
+      with:
+        context: ./python3
+        file: ./python3/Dockerfile
+        push: false
+        tags: hydrocheck/python3:latest
+
+    - name: r
+      uses: docker/build-push-action@v2
+      with:
+        context: ./r
+        file: ./r/Dockerfile
+        push: false
+        tags: hydrocheck/r:latest
+
+    - name: singleuser
+      uses: docker/build-push-action@v2
+      with:
+        context: ./singleuser
+        file: ./singleuser/Dockerfile
+        push: false
+        tags: hydrocheck/singleuser:latest
+
+    - name: summa-master
+      uses: docker/build-push-action@v2
+      with:
+        context: ./summa-master
+        file: ./summa-master/Dockerfile
+        push: false
+        tags: hydrocheck/summa-master:latest
+
+    - name: summa-master
+      uses: docker/build-push-action@v2
+      with:
+        context: ./summa-master
+        file: ./summa-master/Dockerfile
+        push: false
+        tags: hydrocheck/summa-master:latest
+
+    - name: summa-sopron
+      uses: docker/build-push-action@v2
+      with:
+        context: ./summa-sopron
+        file: ./summa-sopron/Dockerfile
+        push: false
+        tags: hydrocheck/summa-sopron:latest
+
+    - name: taudem
+      uses: docker/build-push-action@v2
+      with:
+        context: ./taudem
+        file: ./taudem/Dockerfile
+        push: false
+        tags: hydrocheck/taudem:latest
+
+    - name: wrfhydro
+      uses: docker/build-push-action@v2
+      with:
+        context: ./wrfhydro
+        file: ./wrfhydro/Dockerfile
+        push: false
+        tags: hydrocheck/wrfhydro:latest
